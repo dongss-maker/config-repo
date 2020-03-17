@@ -13,3 +13,12 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 username: dongss
+
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
