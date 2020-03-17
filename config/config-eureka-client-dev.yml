@@ -12,7 +12,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-username: dongss
+person: 
+  name: dongss
+  sex: male
+  age: 26
 
 management:
   endpoint:
