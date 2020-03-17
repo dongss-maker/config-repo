@@ -13,9 +13,9 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 person: 
-  name: yuwm
-  sex: male
-  age: 26
+  name: zhangsan
+  sex: female
+  age: 27
 
 management:
   endpoint:
