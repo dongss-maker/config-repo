@@ -22,7 +22,7 @@ eureka:
 person: 
   name: caocao
   sex: nan
-  age: yongsheng
+  age: 18
   
 management:
   endpoint:
