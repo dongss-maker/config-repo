@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: single-config-client
+  rabbitmq:
+    host: localhost
+    port: 15672
+    username: guest
+    password: guest
 eureka:
   instance:
     prefer-ip-address: true
