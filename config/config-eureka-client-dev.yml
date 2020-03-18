@@ -22,11 +22,4 @@ person:
   sex: nan
   age: 32
 
-management:
-  endpoint:
-    shutdown:
-      enabled: false
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+
