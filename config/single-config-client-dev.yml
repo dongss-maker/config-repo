@@ -23,3 +23,12 @@ person:
   name: lisi
   sex: female
   age: 25
+  
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
