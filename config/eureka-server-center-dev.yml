@@ -1,0 +1,48 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server-center
+  cloud:
+    inetutils:
+      ##忽略指定名称的网卡, 支持正则表达式
+      ignoredInterfaces: ['VMware.*','veth.*','docker0']
+#      - docker0
+#      - veth.*
+#      - VM.*
+      preferredNetworks: ['10.10']
+      #倾向于使用的IP地址，接受一个正则表达式数组
+#      - 10.10
+
+eureka:
+  server:
+    #禁用自我保护模式
+
+    #(当Eureka Server节点在短时间内丢失过多客户端时（可能发生了网络分区故障），
+    #那么这个节点就会进入自我保护模式。一旦进入该模式，Eureka Server就会保护服务注册表中的信息，
+    #不再删除服务注册表中的数据（也就是不会注销任何微服务）。
+    #当网络故障恢复后，该Eureka Server节点会自动退出自我保护模式。)
+
+
+    #自我保护模式的意义：自我保护模式是一种应对网络异常的安全保护措施。
+    #它的架构哲学是宁可同时保留所有微服务（健康的微服务和不健康的微服务都会保留），
+    #也不盲目注销任何健康的微服务。使用自我保护模式，可以让Eureka集群更加的健壮、稳定
+
+
+    #启动自我保护模式3个条件：1、enable-self-preservation : true;
+    #                         2、期望每分钟最小的更新次数（numberOfRenewsPerMinThreshold）>0
+    #                         3、注册服务每分钟发送的心跳数<期望每分钟最小的更新数
+    #  期望每分钟最小的更新次数=期望每分钟最大更新次数*续租百分比(默认0.85)
+    enable-self-preservation: false
+  instance:
+    hostname: 10.10.1.69
+  client:
+    #是否将自己注册到Eureka Server
+    registerWithEureka: false
+    #是否从Eureka Server从获取注册信息，
+    #默认为true,因为这是个单点Eureka Server ,不需要同步其他Eureka Server数据，故而设为false
+    fetchRegistry: false
+    serviceUrl:
+      #配置与Eureka Server交互的地址，查询服务与依赖服务都需要依赖这个地址，
+      #默认是http://localhost:8761/eureka
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
