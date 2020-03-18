@@ -20,7 +20,7 @@ eureka:
 
 
 person: 
-  name: xxx
+  name: xxz
   sex: nan
   age: 18
   
