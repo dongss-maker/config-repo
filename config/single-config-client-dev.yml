@@ -20,7 +20,7 @@ eureka:
 
 
 person: 
-  name: lisi
+  name: smith
   sex: female
   age: 25
   
