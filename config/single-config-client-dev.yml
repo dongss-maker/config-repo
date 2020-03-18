@@ -2,7 +2,7 @@ server:
   port: 9014
 spring:
   application:
-    name: single-config-client
+    name: @pom.artifactId@
   rabbitmq:
     host: localhost
     port: 5672
@@ -11,7 +11,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
     lease-expiration-duration-in-seconds: 10
     lease-renewal-interval-in-seconds: 5
   client:
