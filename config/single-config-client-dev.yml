@@ -20,9 +20,9 @@ eureka:
 
 
 person: 
-  name: liujun
+  name: caocao
   sex: nan
-  age: 26
+  age: yongsheng
   
 management:
   endpoint:
