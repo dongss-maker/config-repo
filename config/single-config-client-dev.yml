@@ -1,5 +1,5 @@
 server:
-  port: 9013
+  port: 9014
 spring:
   application:
     name: single-config-client
@@ -14,4 +14,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 
-username: dongss
+person: 
+  name: lisi
+  sex: female
+  age: 25
