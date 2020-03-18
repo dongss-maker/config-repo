@@ -20,9 +20,9 @@ eureka:
 
 
 person: 
-  name: alex
-  sex: female
-  age: 25
+  name: dongss
+  sex: nan
+  age: 26
   
 management:
   endpoint:

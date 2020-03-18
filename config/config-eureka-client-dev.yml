@@ -18,9 +18,9 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 person: 
-  name: alex
-  sex: female
-  age: 27
+  name: dongss
+  sex: nan
+  age: 26
 
 management:
   endpoint:
