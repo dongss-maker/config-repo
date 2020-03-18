@@ -20,7 +20,7 @@ eureka:
 
 
 person: 
-  name: caocao
+  name: xxx
   sex: nan
   age: 18
   

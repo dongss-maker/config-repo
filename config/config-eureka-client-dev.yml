@@ -18,7 +18,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 person: 
-  name: caojianjun
+  name: yyy
   sex: nan
   age: 32
 
