@@ -142,7 +142,7 @@ zuul:
 
 
     microserver-consumer-by-ribbon:
-      path: /microserver-consumer/**
+      path: /microserver-consumer-by-ribbon/**
       service-id: microserver-consumer-by-ribbon
     order:
       id: sloth-provider-order
