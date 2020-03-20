@@ -1,0 +1,198 @@
+ignore:
+  clients:
+  - app
+
+
+
+
+#当zuul.routes的配置走serviceId(服务路由)的时候，是
+#ribbon.Readtimeout,ribbon.Sockettimeout生效。
+ribbon:
+  # 请求连接的超时时间
+  SocketTimeout: 700000000
+  # 检查实例是否存活 ,配置Ping操作的时间间隔
+  NFLoadBalancerPingInterval: 3
+  # http建立socket超时时间,毫秒
+  ConnectTimeout: 2000
+  # 请求转发超时时间
+  ReadTimeout: 700000000
+
+
+# hystrix的熔断时间，当请求时间超过这个时间，会自动熔断，释放内存。hystrix的超时时间必须大于ribbon的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 800000000
+
+
+
+
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:9000/uac/oauth/token
+      clientId: webApp
+      clientSecret: 123456
+      user-authorization-uri: http://localhost:9000/uac/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:9000/uac/user
+  validate:
+    code: true
+    privateKey: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApivUg4CsOHsZX09HhfUthRuae3xNDV6D3U36acu0JUd9efbgtHME89B5jqD4ZGowKobLqms/TksDutfFz5z0AQIDAQABAkB0gfqokQkvOLAbcTyWocbesvHnbsmffAs8mTXgA6E1GPqGDOfWnPnmG34KVVj0xDb7juLR32m7TlJYiRjxIhJZAiEA+LBhnjuJkSBEpaOYx0+nCTF6KJwwLrT8p+wPBKq6SpMCIQCrDmzErPch9L5E8Bry1pST6i+ZossBpxbQofBE004fmwIgZNHU8Xo/nidPzTsSsBLZq/9z/8y6N+VF3Kn1uLWiSqMCIQCmFOBYaROd3XIrnvCbXOpvXw6OXfg7B49oTALr4DnXBwIgGWMqDalv/D4yHsI9FddMBBVqfKkVHNINMoGFle+KdYo=
+    useRSA: true
+
+
+spring:
+  rabbitmq:
+    host: 10.10.1.69
+    password: guest
+    port: 5672
+    username: guest
+  redis:
+    host: 10.10.1.205
+    password: 123456
+    port: 6379
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+
+
+zuul:
+  host:
+    # 当zuul.routes的配置走url（传统url路由映射）的时候，
+    # 是zuul.host.connect-timeout-millis,zuul.host.socket-timeout-millis这两个配生效
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  ratelimit:
+    behind-proxy: false
+    default-policy-list:
+      - limit: 300000
+        quota: 1000
+        refresh-interval: 60
+        type:
+          - origin
+    enabled: true
+    key-prefix: sloth-ratelimit
+    policy-list:
+      sloth-provider-uac:
+        - limit: 300000
+          quota: 1000
+          refresh-interval: 60
+          type:
+            - origin
+    repository: redis
+  #设置不自动创建所配置服务的路由
+  #ignored-services: feign-customer
+
+  #不使用自动创建默认路由功能
+  #ignored-services: '*'
+
+
+  # 默认情况下，Zuul在请求路由时会过滤掉HTTP请求头信息中的一些敏感信息，
+  # 防止这些敏感的头信息传递到下游外部服务器。但是如果我们使用安全框架如Spring Security、
+  # Apache Shiro等，需要使用Cookie做登录和鉴权，
+  # 这时可以通过zuul.sensitiveHeaders参数定义，包括Cookie、Set-Cookie、Authorization三个属性
+  # 来使Cookie可以被传递
+
+  # 全局放行
+  #sensitiveHeaders: Cookie,Set-Cookie,Authorization
+
+
+
+  # Zuul提供了用于忽略路径表达式的参数zuul.ignored-patterns。
+  # 使用该参数可以用来设置不希望被API网关进行路由的URL表达式。
+  #ignored-patterns: /**/hello/**
+
+  routes:
+    #路由名：标识服务的名字，这里可以自定义，一般方便和规范来讲，还是自己的服务名一样
+    complain:
+      #当有外部请求到达API网关的时候，根据请求的URL路径去匹配path的规则，通过path找到路由名，
+      #去找对应的serviceId的服务名
+      #  /feign/**  #匹配任意数量字符，支持多级目录
+      #  /feign/*   匹配任意数量字符，但不支持多级目录
+      #  /feign/?   匹配单个字符
+      # 如果有一个可以同时满足多个path的匹配的情况，此时匹配结果取决于路由规则的定义顺序
+      # 这里需要注意的是：properties无法保证路由规则的顺序，推荐使用yml格式配置文件
+      path: /complaint/**
+
+      # 指定路由名放行 （如果全局配置和路由配置均有不同程度的放行，那么采取就近原则，路由配置的放行规则将生效）
+      #sensitiveHeaders: Cookie,Set-Cookie,Authorization
+
+      # 这里一定是你Eureka注册中心的服务的名称，是因为这里配置的serviceId跟eureka结合了
+      # 如果单独使用zuul,那么必须自己机器的IP,如果url:http://localhost:8080/ 这样写死ip,万一这IP挂了，
+      # 这高可用性、服务注册那套东西就用不起来了
+      service-id: sloth-provider-complaints
+
+    # 如果后端微服务服务非常多的时候，每一个都这样配置还是挺麻烦的
+    # Spring Cloud Zuul已经帮我们做了默认配置。默认情况下，Zuul会代理所有注册到注册中心的微服务，
+    # 并且Zuul的默认路由规则如下：http://ZUUL_HOST:ZUUL_PORT/微服务在注册中心的serviceId/**
+    # 会被转发到serviceId对应的微服务，所以说如果遵循默认路由规则，基本上就没什么配置了
+    # 其实，Zuul在注册到Eureka服务中心之后，它会为Eureka中的每个服务都创建一个默认的路由规则，
+    # 默认规则的path会使用serviceId配置的服务名作为请求前缀
+
+
+
+
+
+
+    microserver-consumer-by-ribbon:
+      path: /microserver-consumer/**
+      service-id: microserver-consumer-by-ribbon
+    order:
+      id: sloth-provider-order
+      path: /order/**
+      service-id: sloth-provider-order
+    product:
+      id: product
+      path: /product/**
+      service-id: product
+    uac:
+      id: sloth-provider-uac
+      path: /uac/**
+      service-id: sloth-provider-uac
+    backstage:
+      id: ds-backstage
+      path: /backstage/**
+      service-id: ds-backstage
+    supplychain:
+      id: supplychain
+      path: /supplychain/**
+      service-id: supplychain
+    supplychain-backstage:
+      id: supplychain-backstage
+      path: /supplychain-backstage/**
+      service-id: supplychain-backstage
+    audit:
+      id: audit
+      path: /audit/**
+      service-id: audit
+    ds-app-test:
+      id: ds-app-test
+      path: /ds-app-test/**
+      service-id: ds-app-test
+    supplychain-backstagetest:
+      id: supplychain-backstagetest
+      path: /supplychain-backstagetest/**
+      service-id: supplychain-backstagetest
+
+  sensitive-headers: ''
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+
+
