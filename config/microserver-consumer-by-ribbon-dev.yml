@@ -11,7 +11,7 @@ eureka:
     lease-renewal-interval-in-seconds: 5
   client:
     #不注册eureka
-    register-with-eureka: false
+    register-with-eureka: true
     #拉取注册清单
     fetch-registry: true
     service-url:
