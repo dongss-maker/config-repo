@@ -48,10 +48,10 @@ security:
 
 spring:
   rabbitmq:
-    host: 10.10.1.69
-    password: guest
+    host: localhost
     port: 5672
     username: guest
+    password: guest
   redis:
     host: 10.10.1.205
     password: 123456
@@ -195,6 +195,8 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
+    
+
 
 
 
