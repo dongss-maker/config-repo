@@ -18,7 +18,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 person: 
-  name: 麻辣烫
+  name: master
   sex: nan
   age: 32
 

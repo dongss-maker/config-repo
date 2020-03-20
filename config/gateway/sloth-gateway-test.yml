@@ -141,7 +141,7 @@ zuul:
 
 
     CONFIG-EUREKA-CLIENT:
-      path: /CONFIG-CLIENT/**
+      path: /CONFIG-EUREKA-CLIENT/**
       service-id: CONFIG-EUREKA-CLIENT
     microserver-consumer-by-ribbon:
       path: /microserver-consumer-by-ribbon/**
