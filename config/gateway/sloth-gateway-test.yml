@@ -25,6 +25,7 @@ hystrix:
       execution:
         isolation:
           thread:
+            # 单位毫秒
             timeoutInMilliseconds: 800000000
 
 
@@ -70,23 +71,37 @@ zuul:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
   ratelimit:
+    # 代理之后
     behind-proxy: false
+    enabled: true
+    # 对应存储类型（用来存储统计信息）
+    repository: redis
+    # 对应用来标识请求的key的前缀
+    key-prefix: sloth-ratelimit
+    # 可选 - 针对所有的路由配置的策略，除非特别配置了policies（policy-list）
     default-policy-list:
-      - limit: 300000
-        quota: 1000
+        # 可选 - 每个刷新时间窗口对应的请求数量限制
+        limit: 10
+        #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+        # 每个窗口对应的请求总时间的限制（窗口期内，所有的请求的总时间不能超过这个时间限制）
+        quota: 100
+        # 刷新时间窗口的时间，默认值 (秒)
         refresh-interval: 60
+        type: #可选 限流方式
         type:
           - origin
-    enabled: true
-    key-prefix: sloth-ratelimit
     policy-list:
       sloth-provider-uac:
-        - limit: 300000
-          quota: 1000
+          limit: 10
+          quota: 100
           refresh-interval: 60
           type:
             - origin
-    repository: redis
+    
+    
+    
+    
+    
   #设置不自动创建所配置服务的路由
   #ignored-services: feign-customer
 
