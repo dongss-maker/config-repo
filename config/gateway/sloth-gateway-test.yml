@@ -72,7 +72,7 @@ zuul:
     socket-timeout-millis: 60000
   ratelimit:
     # 代理之后
-    behind-proxy: false
+    behind-proxy: true
     enabled: true
     # 对应存储类型（用来存储统计信息）
     repository: redis
