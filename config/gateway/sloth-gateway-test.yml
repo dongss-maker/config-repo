@@ -89,13 +89,13 @@ zuul:
       refresh-interval: 60
       type:
         - origin
-#    policy-list:
-#      sloth-provider-uac:
-#        limit: 10
-#        quota: 100
-#        refresh-interval: 60
-#        type:
-#          - origin
+    policy-list:
+      CONFIG-EUREKA-CLIENT:
+        limit: 10
+        quota: 100
+        refresh-interval: 60
+        type:
+          - origin
     
     
     
