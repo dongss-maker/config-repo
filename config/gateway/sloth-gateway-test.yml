@@ -80,23 +80,22 @@ zuul:
     key-prefix: sloth-ratelimit
     # 可选 - 针对所有的路由配置的策略，除非特别配置了policies（policy-list）
     default-policy-list:
-        # 可选 - 每个刷新时间窗口对应的请求数量限制
-        limit: 10
-        #可选-  每个刷新时间窗口对应的请求时间限制（秒）
-        # 每个窗口对应的请求总时间的限制（窗口期内，所有的请求的总时间不能超过这个时间限制）
-        quota: 100
-        # 刷新时间窗口的时间，默认值 (秒)
-        refresh-interval: 60
-        type: #可选 限流方式
-        type:
-          - origin
+      # 可选 - 每个刷新时间窗口对应的请求数量限制
+      limit: 10
+      #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+      # 每个窗口对应的请求总时间的限制（窗口期内，所有的请求的总时间不能超过这个时间限制）
+      quota: 100
+      # 刷新时间窗口的时间，默认值 (秒)
+      refresh-interval: 60
+      type:
+        - origin
     policy-list:
       sloth-provider-uac:
-          limit: 10
-          quota: 100
-          refresh-interval: 60
-          type:
-            - origin
+        limit: 10
+        quota: 100
+        refresh-interval: 60
+        type:
+          - origin
     
     
     
