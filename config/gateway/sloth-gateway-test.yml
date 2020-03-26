@@ -35,15 +35,18 @@ hystrix:
 security:
   oauth2:
     client:
+      # 获取token令牌
       access-token-uri: http://localhost:9000/uac/oauth/token
       clientId: webApp
       clientSecret: 123456
+      # 获取authorization_code授权码
       user-authorization-uri: http://localhost:9000/uac/oauth/authorize
     resource:
       user-info-uri: http://localhost:9000/uac/user
   validate:
     code: true
-    privateKey: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApivUg4CsOHsZX09HhfUthRuae3xNDV6D3U36acu0JUd9efbgtHME89B5jqD4ZGowKobLqms/TksDutfFz5z0AQIDAQABAkB0gfqokQkvOLAbcTyWocbesvHnbsmffAs8mTXgA6E1GPqGDOfWnPnmG34KVVj0xDb7juLR32m7TlJYiRjxIhJZAiEA+LBhnjuJkSBEpaOYx0+nCTF6KJwwLrT8p+wPBKq6SpMCIQCrDmzErPch9L5E8Bry1pST6i+ZossBpxbQofBE004fmwIgZNHU8Xo/nidPzTsSsBLZq/9z/8y6N+VF3Kn1uLWiSqMCIQCmFOBYaROd3XIrnvCbXOpvXw6OXfg7B49oTALr4DnXBwIgGWMqDalv/D4yHsI9FddMBBVqfKkVHNINMoGFle+KdYo=
+    #privateKey: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApivUg4CsOHsZX09HhfUthRuae3xNDV6D3U36acu0JUd9efbgtHME89B5jqD4ZGowKobLqms/TksDutfFz5z0AQIDAQABAkB0gfqokQkvOLAbcTyWocbesvHnbsmffAs8mTXgA6E1GPqGDOfWnPnmG34KVVj0xDb7juLR32m7TlJYiRjxIhJZAiEA+LBhnjuJkSBEpaOYx0+nCTF6KJwwLrT8p+wPBKq6SpMCIQCrDmzErPch9L5E8Bry1pST6i+ZossBpxbQofBE004fmwIgZNHU8Xo/nidPzTsSsBLZq/9z/8y6N+VF3Kn1uLWiSqMCIQCmFOBYaROd3XIrnvCbXOpvXw6OXfg7B49oTALr4DnXBwIgGWMqDalv/D4yHsI9FddMBBVqfKkVHNINMoGFle+KdYo=
+    privateKey: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAudwVmOwDBqQwFpPZdEUToqZun2lpbNz05vwYa9M0yc2CmwB5VL69p8ZJgpfoQlgzrBA9V21fiHF1Sv39xHVW9wIDAQABAkBIFwGZixGxZcXxO+/AlXqEQCHwWya1Pw8O+QFP8WAsVYzcFKdwT2mj7albsCer1+yZJ7tW7s2qYgAweSi9SdkBAiEA4iEexpcWtlEeTl9mBvigtsWOh60WpvvSdoL4liQiOSECIQDSaTBqn8cbkTwri1ohIwyFeEnU8EoGkOT7SsRVy+KVFwIhAJRvwVADJfmPziEMJmE1G+peTG1rhY8fhswctSl5lq2BAiBxXxwnV1ABGpBBJiS6Fhh5Egc2JQK95vR6Mh7325OKoQIgXQM8xcsRft7QtX1NFBecVVLzGL3sr0AFfvY8uRU5qPE=
     useRSA: true
 
 
