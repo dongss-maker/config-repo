@@ -3,6 +3,15 @@ server:
 spring:
   application:
     name: microserver-consumer-by-ribbon
+security: 
+  oauth2:
+    client:
+      access-token-uri: http://localhost:9000/uniform/uac/oauth/token
+      clientId: webApp
+      clientSecret: 123456
+      user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:9000/uniform/uac/user
 eureka:
   instance:
     prefer-ip-address: true
