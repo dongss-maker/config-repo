@@ -13,8 +13,8 @@ security:
       #指定获取access token的URI.
       #access-token-uri: http://localhost:9000/uniform/uac/oauth/token
       #指定OAuth2 client ID.
-      #clientId: webApp
-      #clientSecret: 123456
+      clientId: webApp
+      clientSecret: 123456
       #用户跳转去获取access token的URI
       #user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
     resource:
