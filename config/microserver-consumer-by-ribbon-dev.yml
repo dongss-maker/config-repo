@@ -8,7 +8,7 @@ spring:
     password: 123456
     port: 6379
 security: 
-  #oauth2:
+  oauth2:
     #client:
       #指定获取access token的URI.
       #access-token-uri: http://localhost:9000/uniform/uac/oauth/token
@@ -17,8 +17,8 @@ security:
       #clientSecret: 123456
       #用户跳转去获取access token的URI
       #user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
-    #resource:
-      #user-info-uri: http://localhost:9000/uniform/uac/user
+    resource:
+      user-info-uri: http://localhost:9000/uniform/uac/user
 eureka:
   instance:
     prefer-ip-address: true
