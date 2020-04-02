@@ -9,12 +9,13 @@ spring:
     port: 6379
 security: 
   oauth2:
-    client:
-      #获取token地址
+    #client:
+      #指定获取access token的URI.
       #access-token-uri: http://localhost:9000/uniform/uac/oauth/token
-      clientId: webApp
-      clientSecret: 123456
-      #认证地址
+      #指定OAuth2 client ID.
+      #clientId: webApp
+      #clientSecret: 123456
+      #用户跳转去获取access token的URI
       #user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
     resource:
       user-info-uri: http://localhost:9000/uniform/uac/user
