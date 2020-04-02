@@ -3,19 +3,19 @@ server:
 spring:
   application:
     name: microserver-consumer-by-ribbon
-  redis:
-    host: 10.10.1.205
-    password: 123456
-    port: 6379
-security: 
-  oauth2:
-    client:
-      access-token-uri: http://localhost:9000/uniform/uac/oauth/token
-      clientId: webApp
-      clientSecret: 123456
-      user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
-    resource:
-      user-info-uri: http://localhost:9000/uniform/uac/user
+  #redis:
+  #  host: 10.10.1.205
+  #  password: 123456
+  #  port: 6379
+#security: 
+#  oauth2:
+#    client:
+#      access-token-uri: http://localhost:9000/uniform/uac/oauth/token
+#      clientId: webApp
+#      clientSecret: 123456
+#      user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
+#    resource:
+#      user-info-uri: http://localhost:9000/uniform/uac/user
 eureka:
   instance:
     prefer-ip-address: true
