@@ -3,10 +3,10 @@ server:
 spring:
   application:
     name: microserver-consumer-by-ribbon
-  #redis:
-  #  host: 10.10.1.205
-  #  password: 123456
-  #  port: 6379
+  redis:
+    host: 10.10.1.205
+    password: 123456
+    port: 6379
 security: 
   oauth2:
     client:
