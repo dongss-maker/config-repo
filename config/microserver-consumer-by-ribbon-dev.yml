@@ -10,10 +10,12 @@ spring:
 security: 
   oauth2:
     client:
-      access-token-uri: http://localhost:9000/uniform/uac/oauth/token
+      #获取token地址
+      #access-token-uri: http://localhost:9000/uniform/uac/oauth/token
       clientId: webApp
       clientSecret: 123456
-      user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
+      #认证地址
+      #user-authorization-uri: http://localhost:9000/uniform/uac/oauth/authorize
     resource:
       user-info-uri: http://localhost:9000/uniform/uac/user
 eureka:
