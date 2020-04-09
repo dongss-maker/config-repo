@@ -9,13 +9,13 @@ ignore:
 #ribbon.Readtimeout,ribbon.Sockettimeout生效。
 ribbon:
   # 请求连接的超时时间
-  SocketTimeout: 700000000
+  #SocketTimeout: 700000000
   # 检查实例是否存活 ,配置Ping操作的时间间隔
   NFLoadBalancerPingInterval: 3
-  # http建立socket超时时间,毫秒
-  ConnectTimeout: 2000
-  # 请求转发超时时间
-  ReadTimeout: 700000000
+  # http建立socket超时时间,毫秒(建立连接所用的时间)
+  ConnectTimeout: 100000
+  # 请求转发超时时间(建立连接后从服务器读取到可用资源所用的时间)
+  ReadTimeout: 10000
 
 
 # hystrix的熔断时间，当请求时间超过这个时间，会自动熔断，释放内存。hystrix的超时时间必须大于ribbon的超时时间
@@ -26,7 +26,7 @@ hystrix:
         isolation:
           thread:
             # 单位毫秒
-            timeoutInMilliseconds: 800000000
+            timeoutInMilliseconds: 8000
 
 
 
